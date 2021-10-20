@@ -27,8 +27,14 @@ RUN chmod +x get_helm.sh
 RUN ./get_helm.sh
 
 
+WORKDIR /tmp/kops/
 
+RUN curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+RUN mv kops-linux-amd64 kops
+RUN chmod +x kops
+RUN mv kops /usr/local/bin
 
+WORKDIR /app
 
 
 
